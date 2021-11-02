@@ -24,10 +24,11 @@ class FileViewer extends Component {
     this.state = {
       loading: true,
     };
+    this.getElementId = this.getElementId.bind(this)
   }
 
   componentDidMount() {
-    const container = document.getElementById('pg-viewer');
+    const container = document.getElementById(this.getElementId());
     const height = container ? container.clientHeight : 0;
     const width = container ? container.clientWidth : 0;
     this.setState({ height, width });
@@ -71,12 +72,16 @@ class FileViewer extends Component {
     }
   }
 
+  getElementId(){
+    return `pg-viewer-${this.uniqIdentifier}`
+  }
+
   render() {
     const commonProps = Object.assign({}, this.props, { uniqIdentifier: this.uniqIdentifier });
     const Driver = this.getDriver(commonProps);
     return (
       <div className="pg-viewer-wrapper">
-        <div className="pg-viewer" id="pg-viewer">
+        <div className="pg-viewer" id={this.getElementId()}>
           <Driver {...commonProps} width={this.state.width} height={this.state.height} />
         </div>
       </div>
