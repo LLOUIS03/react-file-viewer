@@ -122,8 +122,20 @@ export default class PDFDriver extends React.Component {
   }
 
   renderPages() {
+    const { isPreview } = this.props
     const { pdf, containerWidth, zoom } = this.state;
     if (!pdf) return null;
+    if (isPreview) {
+     return (
+      <PDFPage
+        index={1}
+        pdf={pdf}
+        containerWidth={containerWidth}
+        zoom={zoom * INCREASE_PERCENTAGE}
+        disableVisibilityCheck={this.props.disableVisibilityCheck}
+      />
+     )
+    }
     const pages = Array.apply(null, { length: pdf.numPages });
     return pages.map((v, i) => (
       (<PDFPage
