@@ -90,7 +90,7 @@ class FileViewer extends Component {
 }
 
 FileViewer.propTypes = {
-  isPreview: PropTypes.boolean,
+  isPreview: PropTypes.bool,
   fileType: PropTypes.string.isRequired,
   filePath: PropTypes.string.isRequired,
   onError: PropTypes.func,
